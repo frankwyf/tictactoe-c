@@ -40,6 +40,23 @@ target_link_libraries(test_game PRIVATE tictactoe_game)
 add_test(NAME GameTests COMMAND test_game)
 set_tests_properties(GameTests PROPERTIES TIMEOUT 30)
 
+# ── Examples ─────────────────────────────────────────────────────────────────
+add_executable(sample_game examples/sample_game.c)
+target_link_libraries(sample_game PRIVATE tictactoe_game)
+
+# ── Code coverage (GCC / Clang, Linux / macOS) ────────────────────────────────
+option(TICTACTOE_COVERAGE "Enable gcov/lcov code-coverage instrumentation" OFF)
+if(TICTACTOE_COVERAGE)
+    if(NOT CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+        message(WARNING "TICTACTOE_COVERAGE requires GCC or Clang — disabling.")
+        set(TICTACTOE_COVERAGE OFF)
+    else()
+        message(STATUS "Coverage instrumentation enabled")
+        add_compile_options(--coverage -fprofile-arcs -ftest-coverage)
+        add_link_options(--coverage)
+    endif()
+endif()
+
 # ── Install rules ─────────────────────────────────────────────────────────────
 include(GNUInstallDirs)
 
@@ -48,4 +65,7 @@ install(TARGETS tictactoe
 )
 install(FILES src/game.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tictactoe
+)
+install(FILES examples/sample_game.c
+    DESTINATION ${CMAKE_INSTALL_DOCDIR}/examples
 )

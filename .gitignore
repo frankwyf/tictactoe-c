@@ -7,6 +7,18 @@ Release/
 MinSizeRel/
 RelWithDebInfo/
 
+# CMakePresets build directories (build/<preset-name>)
+build/debug/
+build/release/
+build/coverage/
+
+# Coverage artefacts
+*.gcda
+*.gcno
+*.gcov
+coverage.info
+coverage/
+
 # Object files
 *.o
 *.obj

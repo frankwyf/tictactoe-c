@@ -1,0 +1,56 @@
+---
+# Base on LLVM style, adjusted to match the project's C11 conventions.
+BasedOnStyle: LLVM
+
+Language: C
+
+# Indentation
+IndentWidth: 4
+TabWidth:    4
+UseTab:      Never
+
+# Column limit
+ColumnLimit: 100
+
+# Braces — Allman for function/namespace/class/enum, K&R for control flow
+BreakBeforeBraces: Linux
+
+# Short constructs — keep them readable
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+
+# Alignment
+AlignConsecutiveAssignments:
+  Enabled:          true
+  AcrossEmptyLines: false
+  AcrossComments:   false
+AlignConsecutiveMacros:
+  Enabled:          true
+  AcrossEmptyLines: false
+  AcrossComments:   false
+
+# Pointer style — int *p, not int* p
+PointerAlignment: Right
+
+# Includes
+SortIncludes: CaseSensitive
+IncludeBlCategories:
+  - Regex:    '^".*"'
+    Priority: 1
+  - Regex:    '^<.*>'
+    Priority: 2
+
+# Spacing
+SpaceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+# Comments
+ReflowComments: false
+
+# Line endings (LF on all platforms)
+LineEnding: LF
+...
