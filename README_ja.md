@@ -1,8 +1,10 @@
 # 汎用三目並べ（C言語実装）
 
 [![CI](https://github.com/frankwyf/tictactoe-c/actions/workflows/ci.yml/badge.svg)](https://github.com/frankwyf/tictactoe-c/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/frankwyf/tictactoe-c/branch/main/graph/badge.svg)](https://codecov.io/gh/frankwyf/tictactoe-c)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![C Standard](https://img.shields.io/badge/C-C11-blue.svg)](https://en.wikipedia.org/wiki/C11_(C_standard_revision))
+[![GitHub release](https://img.shields.io/github/v/release/frankwyf/tictactoe-c)](https://github.com/frankwyf/tictactoe-c/releases)
 
 [English](README.md) | [中文](README_zh.md) | **日本語**
 
@@ -25,7 +27,17 @@ C11 で書かれた柔軟なコマンドライン三目並べゲームです。
 
 ## クイックスタート
 
-### CMake（全プラットフォーム共通）
+### CMakePresets（推奨）
+
+```bash
+cmake --preset debug
+cmake --build --preset debug
+ctest --preset debug
+```
+
+利用可能なプリセット：`debug` · `release` · `coverage`（Linux/macOS のみ）
+
+### CMake（手動設定）
 
 ```bash
 cmake -B build
@@ -48,15 +60,28 @@ make
 ## ビルドとテスト実行
 
 ```bash
+# CMakePresets（推奨）
+cmake --preset debug && cmake --build --preset debug
+ctest --preset debug
+
+# 手動 CMake
 cmake -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
 ctest --test-dir build --output-on-failure
 ```
 
-期待される出力（全27テストが合格）：
+期待される出力（27テストグループ、合記83アサーションが合格）：
 
 ```
-Results: 27/27 passed
+Results: 83/83 passed
+```
+
+### コードカバレッジ（Linux / macOS）
+
+```bash
+cmake --preset coverage && cmake --build --preset coverage
+ctest --preset coverage
+# lcov/genhtml でレポート生成、または CI で Codecov にアップロード
 ```
 
 ---

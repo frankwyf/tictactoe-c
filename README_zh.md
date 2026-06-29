@@ -1,8 +1,10 @@
 # 通用井字棋（C语言实现）
 
 [![CI](https://github.com/frankwyf/tictactoe-c/actions/workflows/ci.yml/badge.svg)](https://github.com/frankwyf/tictactoe-c/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/frankwyf/tictactoe-c/branch/main/graph/badge.svg)](https://codecov.io/gh/frankwyf/tictactoe-c)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![C Standard](https://img.shields.io/badge/C-C11-blue.svg)](https://en.wikipedia.org/wiki/C11_(C_standard_revision))
+[![GitHub release](https://img.shields.io/github/v/release/frankwyf/tictactoe-c)](https://github.com/frankwyf/tictactoe-c/releases)
 
 [English](README.md) | **中文** | [日本語](README_ja.md)
 
@@ -25,7 +27,17 @@
 
 ## 快速开始
 
-### CMake（全平台通用）
+### CMakePresets（推荐）
+
+```bash
+cmake --preset debug
+cmake --build --preset debug
+ctest --preset debug
+```
+
+可用预设：`debug` · `release` · `coverage`（仅 Linux/macOS）
+
+### CMake（手动配置）
 
 ```bash
 cmake -B build
@@ -48,15 +60,28 @@ make
 ## 构建与运行测试
 
 ```bash
+# CMakePresets（推荐）
+cmake --preset debug && cmake --build --preset debug
+ctest --preset debug
+
+# 手动 CMake
 cmake -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
 ctest --test-dir build --output-on-failure
 ```
 
-预期输出（27 个测试全部通过）：
+预期输出（27 组测试共 83 个断言全部通过）：
 
 ```
-Results: 27/27 passed
+Results: 83/83 passed
+```
+
+### 代码覆盖率（Linux / macOS）
+
+```bash
+cmake --preset coverage && cmake --build --preset coverage
+ctest --preset coverage
+# 使用 lcov/genhtml 生成报告，或通过 CI 上传到 Codecov
 ```
 
 ---

@@ -1,8 +1,10 @@
 # Generalized Tic-Tac-Toe (C)
 
 [![CI](https://github.com/frankwyf/tictactoe-c/actions/workflows/ci.yml/badge.svg)](https://github.com/frankwyf/tictactoe-c/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/frankwyf/tictactoe-c/branch/main/graph/badge.svg)](https://codecov.io/gh/frankwyf/tictactoe-c)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![C Standard](https://img.shields.io/badge/C-C11-blue.svg)](https://en.wikipedia.org/wiki/C11_(C_standard_revision))
+[![GitHub release](https://img.shields.io/github/v/release/frankwyf/tictactoe-c)](https://github.com/frankwyf/tictactoe-c/releases)
 
 **English** | [中文](README_zh.md) | [日本語](README_ja.md)
 
@@ -25,7 +27,17 @@ Supports configurable grid size (3–10) and win condition length — from the c
 
 ## Quick Start
 
-### CMake (all platforms)
+### CMakePresets (recommended)
+
+```bash
+cmake --preset debug          # configure
+cmake --build --preset debug  # build
+ctest --preset debug          # test
+```
+
+Available presets: `debug` · `release` · `coverage` (Linux/macOS only)
+
+### CMake (manual)
 
 ```bash
 cmake -B build
@@ -48,15 +60,28 @@ make
 ## Building & Running Tests
 
 ```bash
+# CMakePresets (recommended)
+cmake --preset debug && cmake --build --preset debug
+ctest --preset debug
+
+# Or manual CMake
 cmake -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
 ctest --test-dir build --output-on-failure
 ```
 
-Expected output (all 27 tests pass):
+Expected output (all 83 assertions pass across 27 test groups):
 
 ```
-Results: 27/27 passed
+Results: 83/83 passed
+```
+
+### Code Coverage (Linux / macOS)
+
+```bash
+cmake --preset coverage && cmake --build --preset coverage
+ctest --preset coverage
+# Then collect with lcov / genhtml or upload to Codecov via CI
 ```
 
 ---
@@ -69,14 +94,20 @@ tictactoe-c/
 │   ├── game.h        Public API (types, constants, function declarations)
 │   ├── game.c        Core game logic (board, move validation, win detection)
 │   └── main.c        Interactive two-player CLI
+├── examples/
+│   └── sample_game.c Scripted demo — shows API usage without stdin
 ├── tests/
-│   └── test_game.c   27 unit tests (zero-dependency test runner built in)
+│   └── test_game.c   83 assertions across 27 test groups (built-in runner)
 ├── .github/
+│   ├── ISSUE_TEMPLATE/     Bug report & feature request forms
+│   ├── PULL_REQUEST_TEMPLATE.md
 │   └── workflows/
-│       ├── ci.yml        CI — build, test, static-analysis, sanitizers, valgrind
-│       └── release.yml   CD — build binaries and publish GitHub Release on tag
+│       ├── ci.yml     CI: build·test·cppcheck·ASan·valgrind·coverage·format
+│       └── release.yml  CD: cross-platform binaries on tag push
 ├── CMakeLists.txt    Primary build system
+├── CMakePresets.json debug / release / coverage presets
 ├── Makefile          Convenience build for Linux/macOS
+├── .clang-format     Code style (LLVM-based, 4-space, Allman functions)
 └── ...
 ```
 
