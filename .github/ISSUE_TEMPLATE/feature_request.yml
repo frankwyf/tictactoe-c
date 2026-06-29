@@ -1,0 +1,53 @@
+name: Feature Request
+description: Suggest an improvement or new feature for tictactoe-c
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea to make this project better? We'd love to hear it!
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation / Problem Statement
+      description: What problem does this feature solve, or what use case does it enable?
+      placeholder: "As a user, I want ... so that ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Describe the feature and, if applicable, how you'd like it to work.
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: API / Interface Changes
+      description: |
+        If this requires adding or changing public functions in `game.h`,
+        sketch the new signatures here.
+      placeholder: |
+        int game_ai_move(char symbol, int difficulty);
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any other approaches you considered and why you prefer this one.
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Would you like to implement this?
+      options:
+        - "Yes, I can open a PR"
+        - "Maybe, I'd need guidance"
+        - "No, just suggesting"
