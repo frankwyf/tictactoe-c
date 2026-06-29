@@ -1,0 +1,38 @@
+# Docker Compose — convenient commands for development
+#
+# Usage:
+#   docker compose run --rm test       # build and run all tests
+#   docker compose run --rm game       # play interactively
+#   docker compose run --rm coverage   # generate coverage report
+
+services:
+  test:
+    build:
+      context: .
+      target: test
+    image: tictactoe-test
+
+  game:
+    build:
+      context: .
+      target: runtime
+    image: tictactoe
+    stdin_open: true
+    tty: true
+
+  coverage:
+    build:
+      context: .
+      target: build
+    image: tictactoe-build
+    command: >
+      bash -c "
+        cmake -B build-cov -DCMAKE_BUILD_TYPE=Debug -DTICTACTOE_COVERAGE=ON &&
+        cmake --build build-cov &&
+        ./build-cov/test_game &&
+        ./build-cov/test_ai &&
+        apt-get update && apt-get install -y lcov &&
+        lcov --capture --directory build-cov --output-file /tmp/coverage.info --rc branch_coverage=1 &&
+        lcov --remove /tmp/coverage.info '/usr/*' '*/tests/*' --output-file /tmp/coverage.info &&
+        lcov --list /tmp/coverage.info
+      "

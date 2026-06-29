@@ -1,0 +1,11 @@
+build/
+.git/
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+*.gcda
+*.gcno
+docs/html/
+docs/man/
