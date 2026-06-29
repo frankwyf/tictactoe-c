@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "tictactoe-c"
+message: "If you use this software, please cite it as below."
+type: software
+version: "1.0.0"
+date-released: "2026-06-30"
+license: MIT
+url: "https://github.com/frankwyf/tictactoe-c"
+repository-code: "https://github.com/frankwyf/tictactoe-c"
+authors:
+  - family-names: Wang
+    given-names: Yifan
+    alias: frankwyf
+keywords:
+  - tic-tac-toe
+  - c
+  - minimax
+  - alpha-beta-pruning
+  - game
+  - cli
+abstract: >-
+  A flexible command-line Tic-Tac-Toe game written in C11 with
+  configurable grid size (3–10), adjustable win condition, an AI
+  opponent using Minimax with alpha-beta pruning, and comprehensive
+  CI/CD with multi-platform support.

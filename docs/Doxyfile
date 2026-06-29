@@ -1,12 +1,12 @@
 # Doxyfile — Doxygen configuration for tictactoe-c
-# Generate with: doxygen docs/Doxyfile
+# Generate with: cd docs && doxygen Doxyfile
 
 PROJECT_NAME           = "tictactoe-c"
 PROJECT_NUMBER         = "1.0.0"
 PROJECT_BRIEF          = "Generalized Tic-Tac-Toe in C11"
 PROJECT_LOGO           =
 
-OUTPUT_DIRECTORY       = docs/html
+OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = YES
 
