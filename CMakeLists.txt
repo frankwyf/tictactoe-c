@@ -20,6 +20,7 @@ endif()
 # ── Game library ─────────────────────────────────────────────────────────────
 add_library(tictactoe_game STATIC
     src/game.c
+    src/ai.c
 )
 target_include_directories(tictactoe_game
     PUBLIC
@@ -39,6 +40,12 @@ target_link_libraries(test_game PRIVATE tictactoe_game)
 
 add_test(NAME GameTests COMMAND test_game)
 set_tests_properties(GameTests PROPERTIES TIMEOUT 30)
+
+add_executable(test_ai tests/test_ai.c)
+target_link_libraries(test_ai PRIVATE tictactoe_game)
+
+add_test(NAME AITests COMMAND test_ai)
+set_tests_properties(AITests PROPERTIES TIMEOUT 60)
 
 # ── Examples ─────────────────────────────────────────────────────────────────
 add_executable(sample_game examples/sample_game.c)
