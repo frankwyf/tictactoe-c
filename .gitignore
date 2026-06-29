@@ -1,0 +1,46 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+Debug/
+Release/
+MinSizeRel/
+RelWithDebInfo/
+
+# Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+tictactoe
+test_game
+
+# Static libraries
+*.a
+*.lib
+
+# CMake generated
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+install_manifest.txt
+_deps/
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.user
+*.ncb
+*.sdf
+*.VC.db
+*.VC.opendb
+*.opensdf
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
