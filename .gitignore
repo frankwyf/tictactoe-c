@@ -56,3 +56,7 @@ _deps/
 
 # Windows
 Thumbs.db
+
+# Doxygen output
+docs/html/
+docs/man/
