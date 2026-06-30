@@ -47,6 +47,10 @@ target_link_libraries(test_ai PRIVATE tictactoe_game)
 add_test(NAME AITests COMMAND test_ai)
 set_tests_properties(AITests PROPERTIES TIMEOUT 60)
 
+# ── Benchmarks ────────────────────────────────────────────────────────────────
+add_executable(bench_win_check bench/bench_win_check.c)
+target_link_libraries(bench_win_check PRIVATE tictactoe_game)
+
 # ── Examples ─────────────────────────────────────────────────────────────────
 add_executable(sample_game examples/sample_game.c)
 target_link_libraries(sample_game PRIVATE tictactoe_game)
