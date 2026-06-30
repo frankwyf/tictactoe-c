@@ -7,6 +7,45 @@ Format follows [Keep a Changelog](https://keepachangelog.com/) and
 
 ---
 
+## [1.2.0] — 2026-07-01
+
+### Added
+- **AI opponent** (`src/ai.c` / `src/ai.h`) — three difficulty levels:
+  - Easy (random), Medium (heuristic), Hard (minimax with alpha-beta pruning)
+- **Single-player CLI mode** — play against the AI with selectable difficulty
+- **Performance benchmark** (`bench/bench_win_check.c`) — measures full-scan vs
+  fast win-check across grid sizes (demonstrates ~12× speedup on 10×10)
+- **Version auto-generation** — CMake `configure_file()` injects version into
+  `src/version.h`; displayed at program startup
+- `AUTHORS` file
+- `CITATION.cff` for academic citation
+- `.github/FUNDING.yml`
+- GitHub Discussions enabled; repository topics set
+
+### Changed
+- CMake project version bumped to 1.2.0
+- `CMakeLists.txt` adds bench target and binary-dir include path
+- `.gitignore` excludes generated `src/version.h`
+
+### Infrastructure
+- Docker multi-stage build (`Dockerfile`) + `docker-compose.yml`
+- Doxygen documentation auto-deployed to GitHub Pages (`.github/workflows/docs.yml`)
+- `.editorconfig` + `.clang-format` for consistent code style
+- `CMakePresets.json` (debug / release / coverage presets)
+- Coverage job (lcov → Codecov) in CI
+- Format-check job in CI
+
+---
+
+## [1.1.0] — 2026-07-01
+
+### Added
+- GitHub community health files: `CODE_OF_CONDUCT.md`, `SECURITY.md`,
+  issue and PR templates
+- Developer tooling: `.clang-format`, `CMakePresets.json`, `examples/`
+
+---
+
 ## [1.0.0] — 2026-06-30
 
 ### Added
