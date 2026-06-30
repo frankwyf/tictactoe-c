@@ -1,5 +1,5 @@
 /*
- * main.c — Interactive two-player Tic-Tac-Toe CLI
+ * main.c — Interactive Tic-Tac-Toe CLI (Human vs Human / Human vs AI)
  *
  * MIT License — see LICENSE for details
  * Copyright (c) 2026 frankwyf
@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "game.h"
+#include "ai.h"
 
 #define MAX_MOVES (TICTACTOE_MAX_GRID * TICTACTOE_MAX_GRID)
 
@@ -47,8 +48,26 @@ int main(void)
 
     printf("=== Tic-Tac-Toe ===\n\n");
 
+    /* ── Game mode selection ─────────────────────────────────────────────── */
+    printf("Game modes:\n");
+    printf("  1. Human vs Human\n");
+    printf("  2. Human vs AI\n");
+    int mode = read_int("Select mode (1-2): ", 1, 2);
+
+    AIDifficulty ai_diff = AI_HARD;
+    char ai_symbol = PLAYER_O;
+    if (mode == 2) {
+        printf("\nAI difficulty:\n");
+        printf("  1. Easy   (random)\n");
+        printf("  2. Medium (heuristic)\n");
+        printf("  3. Hard   (minimax)\n");
+        ai_diff = (AIDifficulty)read_int("Select difficulty (1-3): ", 1, 3);
+        ai_symbol = PLAYER_O;
+        printf("\nYou play as X, AI plays as O.\n");
+    }
+
     /* ── Game setup ──────────────────────────────────────────────────────── */
-    int gridsize = read_int("Enter grid size   (3-10): ",
+    int gridsize = read_int("\nEnter grid size   (3-10): ",
                             TICTACTOE_MIN_GRID, TICTACTOE_MAX_GRID);
 
     char winprompt[64];
@@ -69,28 +88,37 @@ int main(void)
 
     while (!game_board_is_full()) {
         char symbol = players[current & 1];
+        int row, col;
 
-        /* Keep asking until a valid move is made. */
-        for (;;) {
-            printf("Player %c, Choose Location (row col): ", symbol);
-            fflush(stdout);
-
-            int row, col;
-            if (scanf("%d %d", &row, &col) != 2) {
-                flush_stdin();
-                printf("Invalid input — please enter two integers.\n");
-                continue;
-            }
-            flush_stdin();
-
-            if (game_make_move(row, col, symbol) == TICTACTOE_OK) {
-                history[move_count++] = (Move){row, col, symbol};
+        if (mode == 2 && symbol == ai_symbol) {
+            /* AI turn */
+            if (ai_get_move(ai_symbol, ai_diff, &row, &col) != TICTACTOE_OK)
                 break;
+            game_make_move(row, col, symbol);
+            history[move_count++] = (Move){row, col, symbol};
+            printf("AI (%c) plays: (%d, %d)\n", symbol, row, col);
+        } else {
+            /* Human turn */
+            for (;;) {
+                printf("Player %c, Choose Location (row col): ", symbol);
+                fflush(stdout);
+
+                if (scanf("%d %d", &row, &col) != 2) {
+                    flush_stdin();
+                    printf("Invalid input — please enter two integers.\n");
+                    continue;
+                }
+                flush_stdin();
+
+                if (game_make_move(row, col, symbol) == TICTACTOE_OK) {
+                    history[move_count++] = (Move){row, col, symbol};
+                    break;
+                }
+                if (row < 0 || row >= g_grid_size || col < 0 || col >= g_grid_size)
+                    printf("Index out of range, please re-enter\n");
+                else
+                    printf("This location is already taken\n");
             }
-            if (row < 0 || row >= g_grid_size || col < 0 || col >= g_grid_size)
-                printf("Index out of range, please re-enter\n");
-            else
-                printf("This location is already taken\n");
         }
 
         game_show_grid();
