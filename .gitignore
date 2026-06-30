@@ -3,6 +3,9 @@ build/
 cmake-build-*/
 out/
 Debug/
+
+# Generated files
+src/version.h
 Release/
 MinSizeRel/
 RelWithDebInfo/

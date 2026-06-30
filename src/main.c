@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include "game.h"
 #include "ai.h"
+#ifdef TICTACTOE_VERSION
+#include "version.h"
+#endif
 
 #define MAX_MOVES (TICTACTOE_MAX_GRID * TICTACTOE_MAX_GRID)
 
@@ -46,7 +49,11 @@ int main(void)
     Move history[MAX_MOVES];
     int  move_count = 0;
 
-    printf("=== Tic-Tac-Toe ===\n\n");
+    printf("=== Tic-Tac-Toe ===\n");
+#ifdef TICTACTOE_VERSION
+    printf("    version %s\n", TICTACTOE_VERSION);
+#endif
+    printf("\n");
 
     /* ── Game mode selection ─────────────────────────────────────────────── */
     printf("Game modes:\n");

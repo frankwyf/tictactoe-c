@@ -1,0 +1,15 @@
+/**
+ * @file version.h.in
+ * @brief Auto-generated version header (configured by CMake).
+ *
+ * Do NOT edit version.h directly — edit version.h.in instead.
+ */
+#ifndef TICTACTOE_VERSION_H
+#define TICTACTOE_VERSION_H
+
+#define TICTACTOE_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define TICTACTOE_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define TICTACTOE_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define TICTACTOE_VERSION       "@PROJECT_VERSION@"
+
+#endif /* TICTACTOE_VERSION_H */

@@ -1,13 +1,20 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(tictactoe
-    VERSION 1.0.0
+    VERSION 1.2.0
     DESCRIPTION "Generalized Tic-Tac-Toe — configurable grid (3-10) and win length"
     LANGUAGES C
 )
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+
+# Generate version header from template
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/version.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/src/version.h
+    @ONLY
+)
 set(CMAKE_C_EXTENSIONS OFF)
 
 # ── Compiler warnings ────────────────────────────────────────────────────────
@@ -25,6 +32,7 @@ add_library(tictactoe_game STATIC
 target_include_directories(tictactoe_game
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src>
         $<INSTALL_INTERFACE:include>
 )
 
